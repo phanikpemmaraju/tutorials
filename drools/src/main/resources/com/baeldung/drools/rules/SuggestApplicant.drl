@@ -6,9 +6,18 @@ global com.baeldung.drools.model.SuggestedRole suggestedRole;
 
 dialect  "mvel"
 
+
+rule "Suggest Director Role"
+    when
+        Applicant(experienceInYears > 20)
+        Applicant(currentSalary > 2000000 && currentSalary <= 5000000)
+    then
+        suggestedRole.setRole("Director");
+end
+
 rule "Suggest Manager Role"
     when
-        Applicant(experienceInYears > 10)
+        Applicant(experienceInYears > 10  && experienceInYears <= 20)
         Applicant(currentSalary > 1000000 && currentSalary <= 2500000)
     then
         suggestedRole.setRole("Manager");
